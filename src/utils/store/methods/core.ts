@@ -1,10 +1,14 @@
-export default {
+export default abstract class Core{
+  pointers: any;
+  engine: any;
   default (defaultValue) {
     let stateEmpty = Object.keys(this.state).length === 0 && this.state.constructor === Object;
     if (stateEmpty) this.state = defaultValue;
 
     return this;
-  },
+  }
+  state:any
+
   value() {
     let data = this.state;
     for (let i = 0; i < this.pointers.length; i++) {
@@ -14,8 +18,8 @@ export default {
       data = data[this.pointers[i]];
     }
     return data;
-  },
-  get(value) {
+  }
+  get(value:any) {
     let extraPointers;
     if (typeof value === "string") extraPointers = value.split(".");
     else extraPointers = [value];
@@ -23,8 +27,8 @@ export default {
     let clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
     clone.pointers = [...clone.pointers, ...extraPointers];
     return clone;
-  },
-  set(key, value) {
+  }
+  set(key:any, value?:any) {
     if (value === undefined) {
       this.setValue(key);
     } else {
@@ -35,8 +39,8 @@ export default {
       this.setValue(value, extraPointers);
     }
     return this;
-  },
-  setValue(value, pointers = [], setrecursively = true) {
+  }
+  setValue(value:any, pointers = [], setrecursively = true) {
     let depth = 0;
 
     pointers = [...this.pointers, ...pointers];
@@ -58,8 +62,8 @@ export default {
       }
     };
     pointers.reduce(func, this.state);
-  },
-  rename (newName) {
+  }
+  rename (newName:string) {
     let value = this.value();
     let target = this.pointers.pop()
     let place = this.value();
@@ -72,7 +76,7 @@ export default {
     this.pointers.push(newName)
 
     return this
-  },
+  }
   delete() {
     let enclosing = this.state;
     for (let i = 0; i < this.pointers.length - 1; i++) {
@@ -88,10 +92,10 @@ export default {
     }
 
     return this
-  },
+  }
   save() {
     return this.engine.write(this.state);
-  },
+  }
   read() {
     return this.state = this.engine.read()
   }

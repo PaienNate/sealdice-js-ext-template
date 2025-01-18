@@ -1,18 +1,20 @@
-export default {
+import Objects from "./objects";
+
+export default abstract class Strings extends Objects {
     toLowerCase() {
         let value = this.value()
         if (typeof value != "string") throw new Error("You can only use .toLowerCase() on strings.");
     
         this.set(value.toLowerCase())
         return this
-    },
+    }
     toUpperCase() {
         let value = this.value()
         if (typeof value != "string") throw new Error("You can only use .toUpperCase() on strings.");
     
         this.set(value.toUpperCase())
         return this
-    },
+    }
     toString(method, save = false) {
         let value = this.value()
         if (typeof value == "string") throw new Error("This is already a string.");
@@ -39,21 +41,21 @@ export default {
             return this
         }
         return value;
-    },
+    }
     trim() {
         let value = this.value()
         if (typeof value != "string") throw new Error("You can only use .trim() on strings.");
     
         this.set(value.trim())
         return this
-    },
+    }
     replace(oldStr, newStr) {
         let value = this.value()
         if (typeof value != "string") throw new Error("You can only use .replace() on strings.");
     
         this.set(value.replace(oldStr, newStr))
         return this
-    },
+    }
     reverse(save = false) {
         let value = this.value()
 

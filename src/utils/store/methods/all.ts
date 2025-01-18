@@ -11,5 +11,4 @@ const allMethods = {
   ...arrayMethods,
   ...objectMethods
 };
-
 export default allMethods;

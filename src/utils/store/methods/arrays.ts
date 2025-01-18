@@ -1,4 +1,6 @@
-export default {
+import Numbers from "./numbers";
+
+export default abstract class Arrays extends Numbers{
   push(...value) {
     let list = this.value();
 
@@ -8,7 +10,7 @@ export default {
     this.set(list);
 
     return this;
-  },
+  }
   pushSet(...value) {
     let list = this.value();
 
@@ -25,7 +27,7 @@ export default {
     this.set(list);
 
     return this;
-  },
+  }
   pull(/*amount,*/ {getList = false, save = false}) {
     let list = this.value();
     if (!Array.isArray(list)) throw new Error("You can only pull from arrays.");
@@ -36,7 +38,7 @@ export default {
     if (getList) return popped;
 
     return this;
-  },
+  }
   shift({getList = false, save = false}) {
     let list = this.value();
     if (!Array.isArray(list)) throw new Error("You can only shift arrays.");
@@ -47,7 +49,7 @@ export default {
     if (getList) return shifted;
 
     return this;
-  },
+  }
   unshift(...value) {
     let list = this.value();
     if (!Array.isArray(list)) throw new Error("You can only unshift arrays.");
@@ -56,7 +58,7 @@ export default {
     this.set(list);
 
     return this;
-  },
+  }
   every(func) {
     let list = this.value();
 
@@ -67,7 +69,7 @@ export default {
     let boolean = list.every(func);
 
     return boolean;
-  },
+  }
   some(func) {
     let list = this.value();
 
@@ -78,7 +80,7 @@ export default {
     let boolean = list.some(func);
 
     return boolean;
-  },
+  }
   has(value: any): boolean {
     let list = this.value();
     // 检查是否为对象或者数组
@@ -90,7 +92,7 @@ export default {
       throw new Error("You can only check arrays or objects.");
     }
   }
-  ,
+  
   map(func, save = false) {
     let list = this.value();
 
@@ -105,7 +107,7 @@ export default {
       return this
     }
     return list;
-  },
+  }
   sort(func, save = false) {
     let list = this.value();
 
@@ -120,7 +122,7 @@ export default {
       return this
     }
     return list;
-  },
+  }
   filter(func, save = false) {
     let list = this.value();
 
@@ -135,7 +137,7 @@ export default {
       return this
     }
     return list;
-  },
+  }
   reduce(func, save = false) {
     let list = this.value();
 
@@ -150,7 +152,7 @@ export default {
       return this
     }
     return reducedValue;
-  },
+  }
   length() {
     let value = this.value()
     if (value.length == undefined) throw new Error("Cannot get length.");

@@ -1,4 +1,6 @@
-export default {
+import Arrays from "./arrays";
+
+export default abstract class Objects extends Arrays{
     concat(newValue) {
         let value = this.value()
         
